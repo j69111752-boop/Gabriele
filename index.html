@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual da Gabriele</title>
+
+<style>
+body{
+margin:0;
+font-family: 'Arial', sans-serif;
+background: #FFF4A3;
+overflow-x:hidden;
+}
+
+/* Círculo rosa */
+body::before{
+content:"";
+position:fixed;
+top:-30%;
+left:-30%;
+width:160%;
+height:80%;
+background:#FFC1D3;
+border-radius:50%;
+z-index:-1;
+}
+
+.section{
+display:none;
+padding:60px 25px;
+text-align:center;
+color:#333;
+}
+
+.active{
+display:block;
+}
+
+h1{
+font-size:32px;
+}
+
+h2{
+font-size:26px;
+margin-bottom:20px;
+}
+
+p{
+font-size:20px;
+line-height:1.6;
+}
+
+button{
+padding:18px 30px;
+border:none;
+border-radius:40px;
+font-size:20px;
+background:#333;
+color:white;
+margin:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+img{
+width:90%;
+max-width:320px;
+border-radius:25px;
+margin:15px 0;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.confete{
+position:fixed;
+width:10px;
+height:10px;
+background:#FFC1D3;
+top:-10px;
+animation:cair 3s linear infinite;
+}
+
+@keyframes cair{
+to{
+transform:translateY(100vh) rotate(720deg);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="tela1" class="section active">
+<h1>🚨 Atenção Gabriele 🚨</h1>
+<p>Se for você, pode clicar sem medo 😌</p>
+<button onclick="proximaTela()">Sou eu</button>
+<br>
+<button onclick="ativarSom()">🎵 Ativar Som</button>
+</div>
+
+<div id="tela2" class="section">
+<h2>Eu esqueci a data.</h2>
+<p>
+Mas nunca esqueceria o quanto você é importante.
+</p>
+<button onclick="telaJogo()">Quero provas 😌</button>
+</div>
+
+<div id="jogo" class="section">
+<h2>O quanto eu gosto da Gabriele?</h2>
+<button onclick="errado()">Pouquinho</button>
+<button onclick="errado()">Médio</button>
+<button onclick="errado()">Bastante</button>
+<button id="fugir">INFINITO</button>
+</div>
+
+<div id="final" class="section">
+<h2>Era INFINITO. Sempre foi.</h2>
+
+<p>
+Você melhora qualquer dia ruim.<br><br>
+É a parceira oficial de risadas aleatórias.<br><br>
+E eu preciso admitir uma coisa…<br><br>
+Eu sinto falta dos seus abraços.<br><br>
+Eles resolvem coisas que palavras não resolvem.
+</p>
+
+<h2>💛 Feliz Vida, Gabriele.</h2>
+
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+
+</div>
+
+<audio id="musica" loop>
+<source src="nastelbom-happy-birthday-469282.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function proximaTela(){
+document.getElementById("tela1").classList.remove("active");
+document.getElementById("tela2").classList.add("active");
+}
+
+function telaJogo(){
+document.getElementById("tela2").classList.remove("active");
+document.getElementById("jogo").classList.add("active");
+}
+
+function errado(){
+alert("Resposta incorreta 😂 tenta de novo");
+}
+
+let botao = document.getElementById("fugir");
+
+botao.addEventListener("mouseover", function(){
+botao.style.position="absolute";
+botao.style.top=Math.random()*400+"px";
+botao.style.left=Math.random()*250+"px";
+});
+
+botao.addEventListener("click", function(){
+document.getElementById("jogo").classList.remove("active");
+document.getElementById("final").classList.add("active");
+
+for(let i=0;i<60;i++){
+let confete=document.createElement("div");
+confete.classList.add("confete");
+confete.style.left=Math.random()*100+"vw";
+confete.style.animationDuration=Math.random()*3+2+"s";
+document.body.appendChild(confete);
+}
+});
+
+function ativarSom(){
+let musica=document.getElementById("musica");
+musica.play();
+}
+
+</script>
+
+</body>
+</html>
